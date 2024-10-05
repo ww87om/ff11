@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activity.merchant.RegisterMerchantActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/register_merchant_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:title="商家注册"
+        app:titleTextColor="@color/white"
+        android:background="@color/theme"
+        app:navigationIcon="@drawable/back"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            >
+            <ImageView
+                android:id="@+id/register_merchant_img"
+                android:layout_width="match_parent"
+                android:layout_height="90dp"
+                android:src="@drawable/merchant"
+                android:layout_marginTop="30dp">
+            </ImageView>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="吃    什    么"
+                android:textStyle="bold"
+                android:textSize="25sp"
+                android:textColor="@color/black"
+                android:gravity="center_vertical|center_horizontal"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="在每个角落，寻找美味的故事！"
+                android:textSize="15sp"
+                android:gravity="center_vertical|center_horizontal"
+                />
+
+            <EditText
+                android:id="@+id/register_merchant_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入电话号码"
+                android:layout_marginTop="50dp"
+                android:inputType="phone"
+                android:maxLength="11"
+                android:digits="0123456789"
+                />
+
+            <EditText
+                android:id="@+id/register_merchant_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入店铺名称"
+                android:layout_marginTop="10dp"
+                />
+
+            <EditText
+                android:id="@+id/register_merchant_password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入店铺密码"
+                android:layout_marginTop="10dp"
+                android:inputType="textPassword"
+                />
+
+            <Spinner
+                android:id="@+id/register_merchant_location"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                />
+
+            <EditText
+                android:id="@+id/register_merchant_address"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入店铺详细地址"
+                android:layout_marginTop="10dp"
+                />
+
+            <EditText
+                android:id="@+id/register_merchant_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="请输入店铺描述"
+                android:layout_marginTop="10dp"
+                android:inputType="textMultiLine"
+                android:minLines="5"
+                android:gravity="top"
+                android:maxLines="5"
+                android:scrollbars="vertical"
+                android:background="@android:drawable/edit_text"
+                />
+
+            <Button
+                android:id="@+id/register_merchant_Btn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@color/theme"
+                android:text="注册"
+                android:textColor="@color/white"
+                android:foreground="?android:attr/selectableItemBackground"
+                />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
