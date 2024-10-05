@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 
 import com.example.yum.R;
+import com.example.yum.until.FileImgUntil;
 
 public class RegisterMerchantActivity extends AppCompatActivity {
     private ActivityResultLauncher<String> getContentLauncher;
@@ -174,8 +175,9 @@ public class RegisterMerchantActivity extends AppCompatActivity {
 //                //bitmap  我需要将他保存到另一个一个文件当中，并且把保存路径输入进去
 //
 //                //得到一个图名字 root/图片文件+"/a.png
-//                String path=FileImgUntil.getImgName();//获取一个存储图片的路径名字
-//                FileImgUntil.saveImageBitmapToFileImg(uri,RegisterManActivity.this,path);//保存图片
+                String path= FileImgUntil.getImgName();//获取一个存储图片的路径名字
+                FileImgUntil.saveImageBitmapToFileImg(uri,RegisterMerchantActivity.this,path);//保存图片
+
 //                int a=AdminDao.saveBusinessUser(id,pwd,name,des,type,path);
 //                if(a==1){
 //                    Toast.makeText(RegisterManActivity.this, "注册商家成功", Toast.LENGTH_SHORT).show();
