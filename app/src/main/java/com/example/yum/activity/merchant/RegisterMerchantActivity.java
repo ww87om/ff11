@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -22,7 +23,10 @@ import android.widget.Spinner;
 import android.widget.Toast;
 
 
+import com.example.yum.MainActivity;
 import com.example.yum.R;
+import com.example.yum.activity.user.RegisterUserActivity;
+import com.example.yum.dao.MerchantDao;
 import com.example.yum.until.FileImgUntil;
 
 public class RegisterMerchantActivity extends AppCompatActivity {
@@ -132,16 +136,9 @@ public class RegisterMerchantActivity extends AppCompatActivity {
                     }
                 }
 
-                if (phoneStr.isEmpty()) {
-                    Toast.makeText(RegisterMerchantActivity.this, "请输入电话号码", Toast.LENGTH_SHORT).show();
+                if (phoneStr.isEmpty() || phoneStr.length() != 11) {
+                    Toast.makeText(RegisterMerchantActivity.this, "请输入11位有效的电话号码", Toast.LENGTH_SHORT).show();
                     return;
-                }
-                int phonenum = 0;
-                try {
-                    phonenum = Integer.parseInt(phoneStr);
-                } catch (NumberFormatException e) {
-                    Toast.makeText(RegisterMerchantActivity.this, "请输入有效的电话号码", Toast.LENGTH_SHORT).show();
-                    return; // 结束方法，避免插入无效数据
                 }
 
                 if (name.isEmpty()) {
@@ -170,20 +167,23 @@ public class RegisterMerchantActivity extends AppCompatActivity {
                 }
 
 
-//                //向数据库中保存数据
-//                ///storage/emulated/0/Pictures/111.png
-//                //bitmap  我需要将他保存到另一个一个文件当中，并且把保存路径输入进去
-//
-//                //得到一个图名字 root/图片文件+"/a.png
+                //得到一个图片名字 root/图片文件+"/a.png
                 String path= FileImgUntil.getImgName();//获取一个存储图片的路径名字
                 FileImgUntil.saveImageBitmapToFileImg(uri,RegisterMerchantActivity.this,path);//保存图片
 
-//                int a=AdminDao.saveBusinessUser(id,pwd,name,des,type,path);
-//                if(a==1){
-//                    Toast.makeText(RegisterManActivity.this, "注册商家成功", Toast.LENGTH_SHORT).show();
-//                }else{
-//                    Toast.makeText(RegisterManActivity.this, "注册商家失败，账号冲突", Toast.LENGTH_SHORT).show();
-//                }
+                long phone = Long.parseLong(phoneStr);
+                int a = MerchantDao.saveMerchantInfo(phone, name, pwd, loc, add, des, path);
+                if (a == 1) {
+                    Toast.makeText(RegisterMerchantActivity.this, "注册商家账号成功", Toast.LENGTH_SHORT).show();
+                    //启动登陆页面
+                    Intent intent=new Intent(RegisterMerchantActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();//结束当前活动
+                } else if (a == -1) {
+                    Toast.makeText(RegisterMerchantActivity.this, "该手机号已被商家注册", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(RegisterMerchantActivity.this, "注册商家账号失败", Toast.LENGTH_SHORT).show();
+                }
 
             }
         });

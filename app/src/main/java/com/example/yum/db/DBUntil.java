@@ -12,7 +12,7 @@ import android.database.sqlite.SQLiteOpenHelper;
  * 链接数据库
  */
 public class DBUntil extends SQLiteOpenHelper {
-    private static final int version = 3;//版本号，每次更新表结构就会加1，否则不生效
+    private static final int version = 7;//每次数据库结构变更时，更新版本号
     private static final  String databaseName="db_takeaway.db";//数据库名称必须以db结尾
     private  Context context;
     public static SQLiteDatabase con;//链接数据库的链接，通过他可以操作数据库
@@ -55,18 +55,24 @@ public class DBUntil extends SQLiteOpenHelper {
                 new Object[]{22222222222L, "默认商家2", "1234567", "上海", "上海市浦东区", "百年老店","B"});
 
 
-//        db.execSQL("drop table if exists d_user");//如果这表存在则删除
-//        db.execSQL("create table d_user(s_id varchar(20) primary key," +
-//                "s_pwd varcahr(20)," +
-//                "s_name varcahr(20)," +
-//                "s_sex varcahr(200)," +
-//                "s_address varcahr(200)," +
-//                "s_phone varcahr(20)," +
-//                "s_img varchar(255))");//存储是图片路径
-//
-//        db.execSQL("INSERT INTO d_user (s_id, s_pwd, s_name,s_sex, s_address, s_phone, s_img) " +
-//                        "VALUES (?, ?, ?,?, ?,?, ?)",
-//                new Object[]{"admin", "123456", "小铭用户", "男", "北京市","12312312", path});
+        // 用户个人信息表
+        db.execSQL("CREATE TABLE info_user (" +
+                "u_id INTEGER PRIMARY KEY AUTOINCREMENT," + // 设置 u_id 为自增
+                "u_phone INTEGER," +
+                "u_name VARCHAR(20)," +
+                "u_pwd VARCHAR(20)," +
+                "u_gender VARCHAR(10)," +
+                "u_location VARCHAR(20)," +
+                "u_img VARCHAR(255))"); // 存储图片路径
+
+        // 插入用户数据
+        db.execSQL("INSERT INTO info_user (u_phone, u_name, u_pwd, u_gender, u_location, u_img) " +
+                        "VALUES (?, ?, ?, ?, ?, ?)",
+                new Object[]{12345678901L, "默认用户1", "password1", "男", "上海", "A"});
+
+        db.execSQL("INSERT INTO info_user (u_phone, u_name, u_pwd, u_gender, u_location, u_img) " +
+                        "VALUES (?, ?, ?, ?, ?, ?)",
+                new Object[]{23456789012L, "默认用户2", "password2", "女", "北京", "B"});
 //
 //
 //        //写一个存储食物的表
